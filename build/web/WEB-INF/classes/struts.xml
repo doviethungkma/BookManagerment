@@ -1,0 +1,246 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <constant name="struts.action.excludePattern" value="/botdetectcaptcha"/>
+    
+    <package name="default"  namespace="/" extends="struts-default">    
+        <action name="Login" class="struts.action.LoginAction1">
+            <result name="captcha">login_captcha.jsp</result>
+            <result name="successAdmin">Admin/home_admin.jsp</result>
+            <result name="successCustomer">index.jsp</result>
+            <result name="login">login.jsp</result>
+            <!--<result name="fail">404.jsp</result>-->
+        </action>
+        
+        <action name="Captcha" class="struts.action.CaptchaAction">
+            <result name="captcha">login_captcha.jsp</result>
+            <result name="successAdmin">Admin/home_admin.jsp</result>
+            <result name="successCustomer">index.jsp</result>  
+            <result name="fail">404.jsp</result>        
+        </action>
+        
+        <action name="RedirectEditProfile" class="struts.action.RedirectAction">
+            <result name="login">login.jsp</result>
+            <result name="success">editprofile.jsp</result>
+            <result name="fail">404.jsp</result>
+        </action>
+        
+        <action name="EditProfile" class="struts.action.EditProfileAction">
+            <interceptor-ref name="fileUpload">  
+                <param name="maximumSize">2097152</param>  
+                <param name="allowedTypes">  
+                    image/png,image/gif,image/jpeg,image/pjpeg  
+                </param>
+                <param name="allowedExtensions">  
+                    jpg,png,gif 
+                </param>  
+            </interceptor-ref> 
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="login">login.jsp</result>
+            <result name="input">editprofile.jsp</result>
+            <result name="success">index.jsp</result>
+            <result name="fail">404.jsp</result>
+        </action>
+        
+<!--        <action name="ResetPass" class="struts.action.ResetPassAction">
+            <result name="success">resetpass.jsp</result>
+            <result name="fail">404.jsp</result>
+        </action>
+        
+        <action name="ResetPassSuccess" class="struts.action.ResetPassSuccessAction">
+            <result name="success">resetpasssuccess.jsp</result>
+            <result name="fail">404.jsp</result>
+        </action>
+        <action name="CheckMail" class="struts.action.CheckMailAction">
+            <result name="success">checkmail.jsp</result>
+            <result name="fail">404.jsp</result>
+        </action>
+        
+        -->        
+        <action name="ManagerBook" class="struts.action.ManagerBookAction">
+            <result name="login">login.jsp</result>
+            <result name="success">Admin/manager_book.jsp</result>
+            <result name="fail">404.jsp</result>
+        </action>
+
+        <action name="RedirectAddBook" class="struts.action.RedirectAction">
+            <result name="login">login.jsp</result>
+            <result name="success">Admin/add_book.jsp</result>
+            <result name="fail">404.jsp</result>
+        </action>
+        
+        <action name="AddBook" class="struts.action.AddBookAction">
+            <interceptor-ref name="fileUpload">  
+                <param name="maximumSize">2097152</param>  
+                <param name="allowedTypes">  
+                    image/png,image/gif,image/jpeg,image/pjpeg  
+                </param>  
+                <param name="allowedExtensions">  
+                    jpg,png,gif 
+                </param>  
+            </interceptor-ref>
+            <interceptor-ref name="token"></interceptor-ref>
+              
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="login">login.jsp</result>
+            <result name="success">Admin/manager_book.jsp</result>
+            <result name="fail">404.jsp</result>
+            <result name="input">404.jsp</result>
+            <result name="invalid.token">/404.jsp</result>
+        </action> 
+        
+        <action name="RedirectBackup" class="struts.action.RedirectAction">
+            <result name="login">login.jsp</result>
+            <result name="success">Admin/backup.jsp</result>
+            <result name="fail">404.jsp</result>
+        </action>
+        
+        <action name="BackUp" class="struts.action.BackUpAction">
+            <result name="login">login.jsp</result>
+            <result name="success">Admin/backup_success.jsp</result>
+            <result name="fail">404.jsp</result>
+        </action>
+        
+        <action name="ManagerUser" class="struts.action.ManageUserAction">
+            <result name="login">login.jsp</result>
+            <result name="success">Admin/manager_user.jsp</result>
+            <result name="fail">404.jsp</result>
+        </action>
+        
+        <action name="RedirectHome" class="struts.action.RedirectAction">
+            <result name="login">login.jsp</result>
+            <result name="success">Admin/home_admin.jsp</result>
+            <result name="fail">404.jsp</result>
+        </action>
+        
+        <action name="Logout" class="struts.action.LogoutAction">
+            <result name="success">login.jsp</result>
+            <result name="fail">404.jsp</result>
+        </action>
+        
+        <action name="RedirectAddUser" class="struts.action.RedirectAction">
+            <result name="login">login.jsp</result>
+            <result name="success">Admin/add_user.jsp</result>
+            <result name="fail">404.jsp</result>
+        </action>
+        
+        <action name="AddUser" class="struts.action.AddUserAction">
+            <interceptor-ref name="fileUpload">  
+                <param name="maximumSize">2097152</param>  
+                <param name="allowedTypes">  
+                    image/png,image/gif,image/jpeg,image/pjpeg  
+                </param>  
+                <param name="allowedExtensions">  
+                    jpg,png,gif 
+                </param>
+            </interceptor-ref>
+
+            <interceptor-ref name="token"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            
+            <result name="login">login.jsp</result>
+            <result name="input">Admin/add_user.jsp</result>
+            <result name="success">Admin/manager_user.jsp</result>
+            <result name="fail">404.jsp</result>
+            <result name="invalid.token">404.jsp</result>
+        </action>
+        
+        <action name="RedirectEditBook" class="struts.action.RedirectEditBookAction">
+            <result name="login">login.jsp</result>
+            <result name="success">Admin/edit_book.jsp</result>
+            <result name="fail">404.jsp</result>
+        </action>
+        
+        <action name="EditBook" class="struts.action.EditBookAction">
+            <interceptor-ref name="fileUpload">  
+                <param name="maximumSize">2097152</param>  
+                <param name="allowedTypes">  
+                    image/png,image/gif,image/jpeg,image/pjpeg  
+                </param>  
+                <param name="allowedExtensions">  
+                    jpg,png,gif 
+                </param>
+            </interceptor-ref>  
+            
+            <interceptor-ref name="token"></interceptor-ref>
+            
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="login">login.jsp</result>
+            <result name="success">Admin/manager_book.jsp</result>
+            <result name="fail">404.jsp</result>
+        </action>
+        
+        <action name="DeleteBook" class="struts.action.DeleteBookAction">
+            <interceptor-ref name="token"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            
+            <result name="login">login.jsp</result>
+            <result name="success">Admin/manager_book.jsp</result>
+            <result name="fail">404.jsp</result>
+        </action>
+        
+        <action name="DeleteUser" class="struts.action.DeleteUserAction">
+            <interceptor-ref name="token"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            
+            <result name="login">login.jsp</result>
+            <result name="success">Admin/manager_user.jsp</result>
+            <result name="fail">404.jsp</result>
+        </action>
+        
+        <action name="RedirectEditUser" class="struts.action.RedirectEditUserAction">
+            <result name="login">login.jsp</result>
+            <result name="success">Admin/edit_user.jsp</result>
+            <result name="fail">404.jsp</result>
+        </action>
+        
+        <action name="EditUser" class="struts.action.EditUserAction">
+            <interceptor-ref name="fileUpload">  
+                <param name="maximumSize">2097152</param>  
+                <param name="allowedTypes">  
+                    image/png,image/gif,image/jpeg,image/pjpeg  
+                </param>  
+                <param name="allowedExtensions">  
+                    jpg,png,gif 
+                </param>
+            </interceptor-ref> 
+            <interceptor-ref name="token"></interceptor-ref> 
+            
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="login">login.jsp</result>
+            <result name="success">Admin/manager_user.jsp</result>
+            <result name="fail">404.jsp</result>
+        </action>
+        
+        <action name="Forgot" class="struts.action.ForgotPasswordAction">
+            <result name="success">Admin/success.jsp</result>
+            <result name="fail">404.jsp</result>
+        </action>
+        
+        <action name="SearchBook" class="struts.action.SearchBookAction">
+            <result name="login">login.jsp</result>
+            <result name="success">search.jsp</result>
+            <result name="fail">search_fail.jsp</result>
+        </action>
+        
+        <action name="redirectBookDetail" class="struts.action.RedirectBookDetailAction">
+            <result name="login">login.jsp</result>
+            <result name="success">book_detail.jsp</result>
+            <result name="fail">404.jsp</result>
+        </action>
+        
+        <action name="AddComment" class="struts.action.AddCommentAction">
+            <result name="login">login.jsp</result>
+            <result name="success">book_detail.jsp</result>
+            <result name="fail">404.jsp</result>
+        </action>
+        
+        <action name="RedirectCustomer" class="struts.action.RedirectAction">
+            <result name="login">login.jsp</result>
+            <result name="success">index.jsp</result>
+            <result name="fail">404.jsp</result>
+        </action>
+    </package>
+</struts>
