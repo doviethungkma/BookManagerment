@@ -50,6 +50,35 @@ public class BookDAO {
         return lstAllBook;
     }
 
+ public List<Book> getAllBook1() {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection conn = null;
+
+        DataAccess da = new DataAccess();
+        conn = da.getConnection();
+        String sql = "Select * from tbl_book ORDER BY ID DESC";
+        List<Book> lstAllBook = new ArrayList<>();
+        try {
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Book book = new Book();
+                String description = rs.getString("Description");
+                book.setID(rs.getInt("ID"));
+                book.setTitle(rs.getString("Title"));
+                book.setAuthor(rs.getString("Author"));
+                book.setPrice(rs.getDouble("Price"));
+                book.setDescription(cutDescription(description));
+                book.setImage(rs.getString("Image"));
+                lstAllBook.add(book);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DataAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lstAllBook;
+    }
+
     public Book getBookByID(int ID) {
         DataAccess da = new DataAccess();
         Book book = new Book();
